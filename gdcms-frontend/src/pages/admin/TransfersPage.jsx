@@ -116,17 +116,17 @@ const AdminTransfersPage = () => {
 
   if (!formData.patient_id) {
     newErrors.patient_id =
-      'Please select a patient.';
+      'Silakan pilih pasien.';
   }
 
   if (!formData.new_doctor_id) {
     newErrors.new_doctor_id =
-      'Please select a doctor.';
+      'Silakan pilih dokter.';
   }
 
   if (!formData.reason.trim()) {
     newErrors.reason =
-      'Transfer reason is required.';
+      'Alasan transfer wajib diisi.';
   }
 
   if (
@@ -134,7 +134,7 @@ const AdminTransfersPage = () => {
     Number(formData.new_doctor_id) === currentDoctor.id
   ) {
     newErrors.new_doctor_id =
-      'Cannot transfer to the same doctor.';
+      'Tidak dapat mentransfer ke dokter yang sama.';
   }
 
   return newErrors;
@@ -156,8 +156,8 @@ const AdminTransfersPage = () => {
       reason: formData.reason,
       });
 
-      setSubmitSuccess('Transfer completed successfully.');
-      toast.success('Transfer completed successfully.');
+      setSubmitSuccess('Transfer pasien berhasil dilakukan.');
+      toast.success('Transfer pasien berhasil dilakukan.');
       setFormData({ patient_id: '', new_doctor_id: '', reason: '' });
 
       setCurrentDoctor(null);
@@ -172,7 +172,7 @@ const AdminTransfersPage = () => {
       const msg =
         err.response?.data?.message ||
         err.response?.data?.error ||
-        'Transfer failed. Please try again.';
+        'Transfer gagal. Silakan coba lagi.';
       setSubmitError(msg);
       toast.error(msg);
       } finally {
@@ -183,8 +183,8 @@ const AdminTransfersPage = () => {
   return (
     <div className="p-4 sm:p-8">
       <PageHeader
-        title="Doctor Transfer"
-        subtitle="Transfer patients between doctors in the clinic."
+        title="Transfer Pasien"
+        subtitle="Pindahkan pasien antar dokter di klinik."
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -193,7 +193,7 @@ const AdminTransfersPage = () => {
           <div className="flex items-center gap-2 mb-6">
             <ArrowLeftRight size={18} className="text-[#12223a]" strokeWidth={2} />
             <h2 className="text-base font-bold text-[#12223a]">
-              Initiate Transfer
+              Mulai Transfer
             </h2>
           </div>
 
@@ -209,8 +209,8 @@ const AdminTransfersPage = () => {
               <FormSelect
                 id="patient_id"
                 name="patient_id"
-                label="Select Patient"
-                placeholder="Choose a patient"
+                label="Pilih Pasien"
+                placeholder="Pilih pasien"
                 value={formData.patient_id}
                 onChange={handleChange}
                 options={patientOptions}
@@ -220,15 +220,15 @@ const AdminTransfersPage = () => {
 
               {currentDoctor && (
                 <div className="border rounded-xl p-4 bg-gray-50">
-                  <p className="text-xs text-gray-400 uppercase mb-1">Current Doctor</p>
+                  <p className="text-xs text-gray-400 uppercase mb-1">Dokter Saat Ini</p>
                   <p className="font-semibold text-[#12223a]">{currentDoctor.name}</p>
                 </div>)}
 
               <FormSelect
                 id="new_doctor_id"
                 name="new_doctor_id"
-                label="New Doctor"
-                placeholder="Choose a new doctor"
+                label="Dokter Baru"
+                placeholder="Pilih dokter baru"
                 value={formData.new_doctor_id}
                 onChange={handleChange}
                 options={doctorOptions}
@@ -239,8 +239,8 @@ const AdminTransfersPage = () => {
               <FormTextarea
                 id="reason"
                 name="reason"
-                label="Transfer Reason"
-                placeholder="Reason for transferring the patient..."
+                label="Alasan Transfer"
+                placeholder="Alasan pemindahan pasien..."
                 value={formData.reason}
                 onChange={handleChange}
                 error={errors.reason}
@@ -264,7 +264,7 @@ const AdminTransfersPage = () => {
                 isLoading={isSubmitting}
                 className="w-full py-3"
               >
-                {isSubmitting ? 'Processing...' : 'Complete Transfer'}
+                {isSubmitting ? 'Memproses...' : 'Selesaikan Transfer'}
               </Button>
             </form>
           )}
@@ -273,7 +273,7 @@ const AdminTransfersPage = () => {
         {/* Right — recent transfers */}
         <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-base font-bold text-[#12223a] mb-5">
-            Recent Transfers
+            Transfer Terbaru
           </h2>
 
           {isLoadingData ? (
@@ -288,13 +288,13 @@ const AdminTransfersPage = () => {
             </div>
           ) : transfers.length === 0 ? (
             <p className="text-gray-400 text-sm text-center py-8 animate-fadeIn">
-              No transfers yet.
+              Belum ada transfer.
             </p>
           ) : (
             <>
               {/* Table header */}
               <div className="grid grid-cols-3 pb-2 mb-2 border-b border-gray-100">
-                {['Date', 'Patient', 'Doctors'].map((h) => (
+                {['Tanggal', 'Pasien', 'Dokter'].map((h) => (
                   <span
                     key={h}
                     className="text-xs font-medium text-gray-400 uppercase tracking-wide"

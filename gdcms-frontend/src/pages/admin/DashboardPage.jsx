@@ -10,7 +10,7 @@ import doctorService from '../../services/doctorService';
 import examinationService from '../../services/examinationService';
 import controlScheduleService from '../../services/controlScheduleService';
 
-const TABLE_HEADERS = ['Patient Name', 'MRN', 'Status', 'Assigned Doctor'];
+const TABLE_HEADERS = ['Nama Pasien', 'No. RM', 'Status', 'Dokter Penanggung Jawab'];
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();
@@ -89,37 +89,37 @@ const AdminDashboardPage = () => {
     <div className="p-4 sm:p-8">
       {/* Page heading */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#12223a]">Overview</h1>
+        <h1 className="text-2xl font-bold text-[#12223a]">Ringkasan</h1>
         <p className="text-gray-500 text-sm mt-1">
-          Welcome back! Here&apos;s what&apos;s happening today.
+          Selamat datang kembali! Berikut ringkasan aktivitas hari ini.
         </p>
       </div>
 
       {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard
-          label="Total Patients"
+          label="Total Pasien"
           value={stats.patients}
           icon={Users}
           iconColor="text-gray-400"
           isLoading={isLoading}
         />
         <StatCard
-          label="Total Doctors"
+          label="Total Dokter"
           value={stats.doctors}
           icon={Stethoscope}
           iconColor="text-gray-400"
           isLoading={isLoading}
         />
         <StatCard
-          label="Total Examinations"
+          label="Total Pemeriksaan"
           value={stats.examinations}
           icon={ClipboardList}
           iconColor="text-gray-400"
           isLoading={isLoading}
         />
         <StatCard
-          label="Today's Controls"
+          label="Kontrol Hari Ini"
           value={stats.todayControls}
           icon={Calendar}
           iconColor="text-gray-400"
@@ -131,19 +131,19 @@ const AdminDashboardPage = () => {
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <h2 className="text-base font-bold text-[#12223a]">
-            Recent Patient Activity
+            Aktivitas Pasien Terbaru
           </h2>
           <button
             onClick={() => navigate('/admin/patients')}
             className="text-sm font-medium text-[#12223a] hover:text-gold transition-colors duration-150"
           >
-            View All
+            Lihat Semua
           </button>
         </div>
 
         {!isLoading && recentPatients.length === 0 ? (
           <p className="text-center text-gray-400 text-sm py-12 animate-fadeIn">
-            No patient data found.
+            Data pasien tidak ditemukan.
           </p>
         ) : (
           <div className="overflow-x-auto">

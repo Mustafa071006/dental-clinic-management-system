@@ -24,9 +24,9 @@ const DoctorDashboardPage = () => {
   // Greeting berdasarkan jam
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return 'Good morning';
-    if (hour < 17) return 'Good afternoon';
-    return 'Good evening';
+    if (hour < 12) return 'Selamat pagi';
+    if (hour < 17) return 'Selamat siang';
+    return 'Selamat malam';
   };
 
   const doctorFirstName = user?.name
@@ -103,30 +103,30 @@ setRecentExams(exams.slice(0, 3));
     <div className="p-4 sm:p-8">
       {/* Heading */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[#12223a]">My Overview</h1>
+        <h1 className="text-2xl font-bold text-[#12223a]">Ringkasan Saya</h1>
         <p className="text-gray-500 text-sm mt-1">
-          {getGreeting()}, Dr. {doctorFirstName}! Here is your schedule for today.
+          {getGreeting()}, Dr. {doctorFirstName}! Berikut jadwal Anda hari ini.
         </p>
       </div>
 
       {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         <StatCard
-          label="My Patients"
+          label="Pasien Saya"
           value={stats.myPatients}
           icon={Users}
           iconColor="text-blue-400"
           isLoading={isLoading}
         />
         <StatCard
-          label="Today's Controls"
+          label="Kontrol Hari Ini"
           value={stats.todayControls}
           icon={Calendar}
           iconColor="text-blue-400"
           isLoading={isLoading}
         />
         <StatCard
-          label="Recent Examinations"
+          label="Pemeriksaan Terbaru"
           value={stats.recentExams}
           icon={ClipboardList}
           iconColor="text-blue-400"
@@ -139,7 +139,7 @@ setRecentExams(exams.slice(0, 3));
         {/* Upcoming Control Schedule */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-base font-bold text-[#12223a] mb-4">
-            Upcoming Control Schedule
+            Jadwal Kontrol Mendatang
           </h2>
           {isLoading ? (
             <div className="space-y-3">
@@ -158,7 +158,7 @@ setRecentExams(exams.slice(0, 3));
             </div>
           ) : upcomingControls.length === 0 ? (
             <p className="text-gray-400 text-sm text-center py-8 animate-fadeIn">
-              No upcoming controls.
+              Tidak ada jadwal kontrol mendatang.
             </p>
           ) : (
             <div className="space-y-3">
@@ -177,7 +177,7 @@ setRecentExams(exams.slice(0, 3));
                         {c.patient_name || c.patient?.name || '-'}
                       </p>
                       <p className="text-xs text-gray-400 truncate">
-                        {formatDate(c.control_date || c.date)} at{' '}
+                        {formatDate(c.control_date || c.date)} pukul{' '}
                         {formatTime(c.time || c.control_time)}
                       </p>
                     </div>
@@ -192,7 +192,7 @@ setRecentExams(exams.slice(0, 3));
         {/* Recent Examinations */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
           <h2 className="text-base font-bold text-[#12223a] mb-4">
-            Recent Examinations
+            Pemeriksaan Terbaru
           </h2>
           {isLoading ? (
             <div className="space-y-4">
@@ -206,7 +206,7 @@ setRecentExams(exams.slice(0, 3));
             </div>
           ) : recentExams.length === 0 ? (
             <p className="text-gray-400 text-sm text-center py-8 animate-fadeIn">
-              No recent examinations.
+              Belum ada pemeriksaan terbaru.
             </p>
           ) : (
             <div className="space-y-4">
@@ -228,7 +228,7 @@ setRecentExams(exams.slice(0, 3));
                     {e.diagnosis || '-'}
                   </p>
                   <p className="text-xs text-gray-500">
-                    <span className="font-medium">Treatment:</span>{' '}
+                    <span className="font-medium">Tindakan:</span>{' '}
                     {e.treatment || '-'}
                   </p>
                 </div>

@@ -5,6 +5,7 @@ import {
   Pencil
 } from 'lucide-react';
 import LazyImage from './LazyImage';
+import { formatStatus } from '../../utils/formatLabel';
 
 const DoctorCard = ({
   doctor,
@@ -55,7 +56,7 @@ const DoctorCard = ({
               : 'bg-red-100 text-red-700'
           }`}
         >
-          {doctor?.status}
+          {formatStatus(doctor?.status)}
         </span>
       </div>
 
@@ -80,7 +81,7 @@ const DoctorCard = ({
           />
           <span className="truncate">
             {doctor?.phone ||
-              'Not Available'}
+              'Tidak Tersedia'}
           </span>
         </div>
 
@@ -121,7 +122,7 @@ const DoctorCard = ({
           "
         >
           <Pencil size={18} />
-          Edit Profile
+          Ubah Profil
         </button>
 
         <button
@@ -145,8 +146,8 @@ const DoctorCard = ({
           `}
         >
           {isActive
-            ? 'Deactivate'
-            : 'Activate'}
+            ? 'Nonaktifkan'
+            : 'Aktifkan'}
         </button>
       </div>
     </div>

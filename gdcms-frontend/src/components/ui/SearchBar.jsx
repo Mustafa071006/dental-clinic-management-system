@@ -3,7 +3,7 @@ import { Search } from 'lucide-react';
 const SearchBar = ({
   value,
   onChange,
-  placeholder = 'Search...',
+  placeholder = 'Cari...',
   className = '',
 }) => {
   return (

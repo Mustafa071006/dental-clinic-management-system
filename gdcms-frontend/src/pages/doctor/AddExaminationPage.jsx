@@ -79,12 +79,12 @@ const AddExaminationPage = () => {
   });
 }
 
-      toast.success('Examination saved successfully.');
+      toast.success('Pemeriksaan berhasil disimpan.');
 
       navigate(`/doctor/patients/${id}`);
     } catch (err) {
       console.error(err);
-      toast.error('Failed to save examination.');
+      toast.error('Gagal menyimpan pemeriksaan.');
     } finally {
       setIsSubmitting(false);
     }
@@ -95,7 +95,7 @@ const AddExaminationPage = () => {
     <div className="flex items-center gap-4 mb-8">
       <button
         onClick={() => navigate(`/doctor/patients/${id}`)}
-        aria-label="Back to patient"
+        aria-label="Kembali ke detail pasien"
         className="text-gray-500 hover:text-[#12223a] active:scale-90 transition-all duration-150"
       >
         <ArrowLeft size={28} />
@@ -103,11 +103,11 @@ const AddExaminationPage = () => {
 
       <div>
   <h1 className="text-3xl sm:text-4xl font-bold text-[#12223a]">
-    Add Examination
+    Tambah Pemeriksaan
   </h1>
 
   <p className="text-gray-500 mt-1">
-    For patient: {patient?.full_name} (
+    Untuk pasien: {patient?.full_name} (
     {patient?.medical_record_number})
   </p>
 </div>
@@ -120,7 +120,7 @@ const AddExaminationPage = () => {
         <FormInput
           id="examination_date"
           name="examination_date"
-          label="Examination Date"
+          label="Tanggal Pemeriksaan"
           type="date"
           value={formData.examination_date}
           readOnly
@@ -129,7 +129,7 @@ const AddExaminationPage = () => {
         <FormTextarea
           id="complaint"
           name="complaint"
-          label="Complaint"
+          label="Keluhan"
           value={formData.complaint}
           onChange={handleChange}
           rows={3}
@@ -147,7 +147,7 @@ const AddExaminationPage = () => {
         <FormTextarea
           id="treatment"
           name="treatment"
-          label="Treatment"
+          label="Tindakan"
           value={formData.treatment}
           onChange={handleChange}
           rows={3}
@@ -156,7 +156,7 @@ const AddExaminationPage = () => {
         <FormTextarea
           id="notes"
           name="notes"
-          label="Notes"
+          label="Catatan"
           value={formData.notes}
           onChange={handleChange}
           rows={4}
@@ -174,7 +174,7 @@ const AddExaminationPage = () => {
     />
 
     <span className="font-medium">
-      Schedule Follow-up Control
+      Jadwalkan Kontrol Lanjutan
     </span>
   </label>
 
@@ -183,7 +183,7 @@ const AddExaminationPage = () => {
       <FormInput
         id="control_date"
         name="control_date"
-        label="Control Date"
+        label="Tanggal Kontrol"
         type="date"
         min={today}
         value={formData.control_date}
@@ -198,7 +198,7 @@ const AddExaminationPage = () => {
       <FormInput
         id="control_time"
         name="control_time"
-        label="Control Time"
+        label="Waktu Kontrol"
         type="time"
         min="09:00"
         max="21:00"
@@ -223,7 +223,7 @@ const AddExaminationPage = () => {
             }
             className="w-full sm:w-auto"
           >
-            Cancel
+            Batal
           </Button>
 
           <Button
@@ -233,8 +233,8 @@ const AddExaminationPage = () => {
             className="w-full sm:w-auto"
           >
             {isSubmitting
-              ? 'Saving...'
-              : 'Save Examination'}
+              ? 'Menyimpan...'
+              : 'Simpan Pemeriksaan'}
           </Button>
         </div>
       </form>

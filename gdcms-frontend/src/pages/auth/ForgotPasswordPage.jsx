@@ -17,7 +17,7 @@ const ForgotPasswordPage = () => {
     e.preventDefault();
 
     if (!email) {
-      setMessage('Please enter your email.');
+      setMessage('Silakan masukkan email Anda.');
       return;
     }
 
@@ -34,7 +34,7 @@ const ForgotPasswordPage = () => {
     } catch (err) {
       setMessage(
         err.response?.data?.message ||
-          'Email not found.'
+          'Email tidak ditemukan.'
       );
     } finally {
       setIsLoading(false);
@@ -73,7 +73,7 @@ const ForgotPasswordPage = () => {
           </h1>
 
           <p className="text-gray-300 text-base leading-relaxed max-w-sm">
-            Password recovery assistance for clinic staff and administrators.
+            Bantuan pemulihan password untuk staf klinik dan administrator.
           </p>
         </div>
       </div>
@@ -87,16 +87,16 @@ const ForgotPasswordPage = () => {
             className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#12223a] transition-colors duration-150 mb-8"
           >
             <ArrowLeft size={16} />
-            Back to Login
+            Kembali ke Login
           </Link>
 
           <div className="mb-8">
             <h2 className="text-[#12223a] font-bold text-3xl mb-2">
-              Forgot Password
+              Lupa Password
             </h2>
 
             <p className="text-gray-500 text-sm">
-              Enter your registered email address.
+              Masukkan alamat email yang terdaftar.
             </p>
           </div>
 
@@ -107,7 +107,7 @@ const ForgotPasswordPage = () => {
             >
               <div>
                 <label className="block text-sm font-medium text-[#12223a] mb-1.5">
-                  Email Address
+                  Alamat Email
                 </label>
 
                 <div className="relative">
@@ -121,7 +121,7 @@ const ForgotPasswordPage = () => {
                     onChange={(e) =>
                       setEmail(e.target.value)
                     }
-                    placeholder="example@email.com"
+                    placeholder="contoh@email.com"
                     className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#12223a]/20 transition-colors duration-150"
                   />
                 </div>
@@ -142,8 +142,8 @@ const ForgotPasswordPage = () => {
                 className="w-full py-3.5"
               >
                 {isLoading
-                  ? 'Verifying...'
-                  : 'Verify Email'}
+                  ? 'Memverifikasi...'
+                  : 'Verifikasi Email'}
               </Button>
             </form>
           ) : (
@@ -151,7 +151,7 @@ const ForgotPasswordPage = () => {
 
               <div className="bg-green-50 border border-green-200 rounded-xl p-4">
                 <p className="text-green-700 text-sm font-medium">
-                  Email verified successfully.
+                  Email berhasil diverifikasi.
                 </p>
               </div>
 
@@ -159,14 +159,14 @@ const ForgotPasswordPage = () => {
 
                 <h3 className="font-semibold text-[#12223a] mb-2">
                   {userRole === 'ADMIN'
-                    ? 'Contact Developer'
-                    : 'Contact Administrator'}
+                    ? 'Hubungi Developer'
+                    : 'Hubungi Administrator'}
                 </h3>
 
                 <p className="text-sm text-gray-500 leading-relaxed">
                   {userRole === 'ADMIN'
-                    ? 'Please contact the developer to recover your administrator account.'
-                    : 'Only administrators can reset doctor passwords. Please contact the administrator.'}
+                    ? 'Silakan hubungi developer untuk memulihkan akun administrator Anda.'
+                    : 'Hanya administrator yang dapat mereset password dokter. Silakan hubungi administrator.'}
                 </p>
               </div>
 
@@ -177,7 +177,7 @@ const ForgotPasswordPage = () => {
                 className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 active:scale-[0.98] text-white py-3.5 rounded-xl font-semibold transition-all duration-150"
               >
                 <MessageCircle size={18} />
-                Open WhatsApp
+                Buka WhatsApp
               </a>
             </div>
           )}

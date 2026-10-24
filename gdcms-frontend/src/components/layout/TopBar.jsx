@@ -4,16 +4,16 @@ import useAuth from '../../hooks/useAuth';
 const TopBar = ({ onMenuClick }) => {
   const { user, isAdmin } = useAuth();
 
-  const displayName = user?.name || user?.email || 'User';
+  const displayName = user?.name || user?.email || 'Pengguna';
 
-  const roleLabel = isAdmin ? 'Administrator' : 'Doctor Portal';
+  const roleLabel = isAdmin ? 'Administrator' : 'Portal Dokter';
 
   return (
     <header className="h-[65px] bg-white border-b border-gray-200 flex items-center justify-between px-4 sm:px-8 flex-shrink-0 sticky top-0 z-30">
       <div className="flex items-center gap-3 min-w-0">
         <button
           onClick={onMenuClick}
-          aria-label="Open menu"
+          aria-label="Buka menu"
           className="lg:hidden p-1.5 -ml-1.5 rounded-lg text-[#12223a] hover:bg-gray-100 transition-colors flex-shrink-0"
         >
           <Menu size={22} />

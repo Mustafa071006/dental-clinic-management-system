@@ -48,14 +48,14 @@ const EditDoctorModal = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Edit Doctor Profile"
+      title="Ubah Profil Dokter"
       footer={
         <>
           <Button variant="secondary" onClick={onClose} disabled={isSaving}>
-            Cancel
+            Batal
           </Button>
           <Button onClick={handleSubmit} isLoading={isSaving}>
-            Save Changes
+            Simpan Perubahan
           </Button>
         </>
       }
@@ -64,7 +64,7 @@ const EditDoctorModal = ({
         <FormInput
           id="edit-doctor-name"
           name="name"
-          label="Name"
+          label="Nama"
           value={form.name}
           onChange={handleChange}
         />
@@ -81,7 +81,7 @@ const EditDoctorModal = ({
         <FormInput
           id="edit-doctor-specialization"
           name="specialization"
-          label="Specialization"
+          label="Spesialisasi"
           value={form.specialization}
           onChange={handleChange}
         />
@@ -90,8 +90,8 @@ const EditDoctorModal = ({
           id="edit-doctor-password"
           type="password"
           name="password"
-          label="New Password (optional)"
-          placeholder="Leave blank to keep current password"
+          label="Password Baru (opsional)"
+          placeholder="Kosongkan jika tidak ingin mengganti password"
           value={form.password}
           onChange={handleChange}
         />

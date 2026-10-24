@@ -5,6 +5,7 @@ import { ArrowLeft, FileText, Calendar, UserRound, Activity } from 'lucide-react
 import controlScheduleService from '../../services/controlScheduleService';
 import examinationService from '../../services/examinationService';
 import { Skeleton } from '../../components/ui/Skeleton';
+import { formatGender, formatStatus } from '../../utils/formatLabel';
 
 const DetailSkeleton = () => (
   <div className="p-4 sm:p-8 animate-fadeIn">
@@ -80,7 +81,7 @@ const AdminPatientDetailPage = () => {
   if (!patient) {
     return (
       <div className="p-8 text-center text-gray-400 animate-fadeIn">
-        Patient not found.
+        Pasien tidak ditemukan.
       </div>
     );
   }
@@ -91,7 +92,7 @@ const AdminPatientDetailPage = () => {
       <div className="flex items-start gap-4 mb-8">
         <button
           onClick={() => navigate('/admin/patients')}
-          aria-label="Back to patients"
+          aria-label="Kembali ke daftar pasien"
           className="mt-2 text-gray-500 hover:text-[#12223a] active:scale-90 transition-all duration-150"
         >
           <ArrowLeft size={24} />
@@ -99,7 +100,7 @@ const AdminPatientDetailPage = () => {
 
         <div>
           <h1 className="text-3xl sm:text-4xl font-bold text-[#12223a]">
-            Patient Details
+            Detail Pasien
           </h1>
 
           <p className="text-gray-500 mt-1">
@@ -122,11 +123,10 @@ const AdminPatientDetailPage = () => {
               </h2>
 
               <p className="text-gray-500 mt-1 text-center">
-                {patient.gender?.charAt(0).toUpperCase() +
-  patient.gender?.slice(1).toLowerCase()},
-born{' '}
+                {formatGender(patient.gender)},
+lahir{' '}
 {new Date(patient.date_of_birth).toLocaleDateString(
-  'en-GB',
+  'id-ID',
   {
     day: '2-digit',
     month: 'short',
@@ -136,7 +136,7 @@ born{' '}
               </p>
 
               <span className="mt-5 px-4 py-2 rounded-full text-blue-600 bg-blue-50 border border-blue-100">
-                Status: {patient.status}
+                Status: {formatStatus(patient.status)}
               </span>
             </div>
 
@@ -145,7 +145,7 @@ born{' '}
                 <UserRound className="text-[#12223a] flex-shrink-0" size={20} />
                 <div className="min-w-0">
                   <p className="text-sm text-gray-500">
-                    Assigned Doctor
+                    Dokter Penanggung Jawab
                   </p>
 
                   <p className="font-semibold text-[#12223a] truncate">
@@ -158,7 +158,7 @@ born{' '}
                 <Activity className="text-[#12223a] flex-shrink-0" size={20} />
                 <div className="min-w-0">
                   <p className="text-sm text-gray-500">
-                    Contact
+                    Kontak
                   </p>
 
                   <p className="font-semibold text-[#12223a] truncate">
@@ -177,7 +177,7 @@ born{' '}
   <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-100">
     <FileText size={20} className="flex-shrink-0" />
     <h2 className="text-xl sm:text-2xl font-bold text-[#12223a]">
-      Examination History
+      Riwayat Pemeriksaan
     </h2>
   </div>
 
@@ -199,12 +199,12 @@ born{' '}
           </div>
 
           <p className="mt-5 text-base sm:text-lg">
-            <strong>Complaint:</strong>{' '}
+            <strong>Keluhan:</strong>{' '}
             {exam.complaint || '-'}
           </p>
 
           <p className="mt-3 text-base sm:text-lg">
-            <strong>Treatment:</strong>{' '}
+            <strong>Tindakan:</strong>{' '}
             {exam.treatment || '-'}
           </p>
 
@@ -217,7 +217,7 @@ born{' '}
       ))
     ) : (
       <p className="text-center text-gray-500 py-6">
-        No examinations found.
+        Data pemeriksaan tidak ditemukan.
       </p>
     )}
   </div>
@@ -228,7 +228,7 @@ born{' '}
   <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-100">
     <Calendar size={20} className="flex-shrink-0" />
     <h2 className="text-xl sm:text-2xl font-bold text-[#12223a]">
-      Control Schedule
+      Jadwal Kontrol
     </h2>
   </div>
 
@@ -243,7 +243,7 @@ born{' '}
             <div className="w-20 h-20 rounded-xl bg-gray-50 border flex flex-col items-center justify-center flex-shrink-0">
               <span className="text-sm text-gray-500">
                 {new Date(schedule.control_date)
-                  .toLocaleString('en-US', {
+                  .toLocaleString('id-ID', {
                     month: 'short',
                   })
                   .toUpperCase()}
@@ -256,7 +256,7 @@ born{' '}
 
             <div>
               <h3 className="text-xl font-bold text-[#12223a]">
-                Follow-up Appointment
+                Jadwal Kontrol Lanjutan
               </h3>
 
               <p className="text-gray-500">
@@ -266,13 +266,13 @@ born{' '}
           </div>
 
           <span className="px-4 py-2 rounded-full text-blue-600 bg-blue-50 border border-blue-100 whitespace-nowrap">
-            {schedule.status}
+            {formatStatus(schedule.status)}
           </span>
         </div>
       ))
     ) : (
       <p className="text-center text-gray-500 py-6">
-        No control schedules found.
+        Jadwal kontrol tidak ditemukan.
       </p>
     )}
   </div>

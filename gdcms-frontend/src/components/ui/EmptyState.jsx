@@ -1,6 +1,6 @@
 import { Inbox } from 'lucide-react';
 
-const EmptyState = ({ message = 'No data found.', className = '' }) => {
+const EmptyState = ({ message = 'Data tidak ditemukan.', className = '' }) => {
   return (
     <div
       className={`flex flex-col items-center justify-center py-16 px-4 text-gray-400 animate-fadeIn ${className}`}

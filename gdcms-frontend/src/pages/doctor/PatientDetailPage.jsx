@@ -15,11 +15,12 @@ import { Skeleton } from '../../components/ui/Skeleton';
 import FormSelect from '../../components/ui/FormSelect';
 import Button from '../../components/ui/Button';
 import useToast from '../../hooks/useToast';
+import { formatGender, formatStatus } from '../../utils/formatLabel';
 
 const STATUS_OPTIONS = [
-  { value: 'ACTIVE', label: 'ACTIVE' },
-  { value: 'INACTIVE', label: 'INACTIVE' },
-  { value: 'COMPLETE', label: 'COMPLETE' },
+  { value: 'ACTIVE', label: 'Aktif' },
+  { value: 'INACTIVE', label: 'Nonaktif' },
+  { value: 'COMPLETE', label: 'Selesai' },
 ];
 
 const DetailSkeleton = () => (
@@ -107,7 +108,7 @@ setPatientStatus(patientInfo.status);
   if (!patient) {
     return (
       <div className="p-8 text-center text-gray-400 animate-fadeIn">
-        Patient not found.
+        Pasien tidak ditemukan.
       </div>
     );
   }
@@ -127,10 +128,10 @@ setPatientStatus(patientInfo.status);
       ...prev,
       status: newStatus,
     }));
-    toast.success('Patient status updated.');
+    toast.success('Status pasien berhasil diperbarui.');
   } catch (err) {
     console.error(err);
-    toast.error('Failed to update patient status.');
+    toast.error('Gagal memperbarui status pasien.');
   }
 };
 
@@ -151,10 +152,10 @@ const updateScheduleStatus = async (
           : s
       )
     );
-    toast.success('Schedule status updated.');
+    toast.success('Status jadwal berhasil diperbarui.');
   } catch (err) {
     console.error(err);
-    toast.error('Failed to update schedule status.');
+    toast.error('Gagal memperbarui status jadwal.');
   }
 };
 
@@ -165,7 +166,7 @@ const updateScheduleStatus = async (
         <div className="flex items-start gap-4">
           <button
             onClick={() => navigate('/doctor/patients')}
-            aria-label="Back to patients"
+            aria-label="Kembali ke daftar pasien"
             className="mt-2 text-gray-500 hover:text-[#12223a] active:scale-90 transition-all duration-150"
           >
             <ArrowLeft size={24} />
@@ -173,7 +174,7 @@ const updateScheduleStatus = async (
 
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-[#12223a]">
-              Patient Details
+              Detail Pasien
             </h1>
 
             <p className="text-gray-500 mt-1">
@@ -192,7 +193,7 @@ const updateScheduleStatus = async (
           icon={Plus}
           className="w-full sm:w-auto"
         >
-          Add Examination
+          Tambah Pemeriksaan
         </Button>
       </div>
 
@@ -210,14 +211,14 @@ const updateScheduleStatus = async (
               </h2>
 
               <p className="text-gray-500 mt-1 text-center">
-                {patient.gender}, born{' '}
+                {formatGender(patient.gender)}, lahir{' '}
                 {patient.date_of_birth?.split('T')[0]}
               </p>
 
               <div className="mt-5 w-full">
                 <FormSelect
                   id="patient-status"
-                  label="Patient Status"
+                  label="Status Pasien"
                   value={patientStatus}
                   onChange={(e) => updatePatientStatus(e.target.value)}
                   options={STATUS_OPTIONS}
@@ -234,7 +235,7 @@ const updateScheduleStatus = async (
 
                 <div className="min-w-0">
                   <p className="text-sm text-gray-500">
-                    Assigned Doctor
+                    Dokter Penanggung Jawab
                   </p>
 
                   <p className="font-semibold text-[#12223a] truncate">
@@ -251,7 +252,7 @@ const updateScheduleStatus = async (
 
                 <div className="min-w-0">
                   <p className="text-sm text-gray-500">
-                    Contact
+                    Kontak
                   </p>
 
                   <p className="font-semibold text-[#12223a] truncate">
@@ -268,7 +269,7 @@ const updateScheduleStatus = async (
 
             <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-4 sm:p-6">
   <h2 className="text-xl sm:text-2xl font-bold mb-4 text-[#12223a]">
-    Control Schedule History
+    Riwayat Jadwal Kontrol
   </h2>
 
   <div className="space-y-4">
@@ -285,7 +286,7 @@ const updateScheduleStatus = async (
         <p>
           Status:
           <span className="font-semibold ml-2">
-            {schedule.status}
+            {formatStatus(schedule.status)}
           </span>
         </p>
 
@@ -300,7 +301,7 @@ const updateScheduleStatus = async (
               }
               className="px-3 py-2 bg-green-600 hover:bg-green-700 active:scale-95 text-white rounded-lg transition-all duration-150"
             >
-              Complete
+              Selesai
             </button>
 
             <button
@@ -312,7 +313,7 @@ const updateScheduleStatus = async (
               }
               className="px-3 py-2 bg-red-600 hover:bg-red-700 active:scale-95 text-white rounded-lg transition-all duration-150"
             >
-              Cancel
+              Batalkan
             </button>
           </div>
         )}
@@ -320,7 +321,7 @@ const updateScheduleStatus = async (
       ))
     ) : (
       <p className="text-center text-gray-500 py-4">
-        No control schedule history.
+        Belum ada riwayat jadwal kontrol.
       </p>
     )}
   </div>
@@ -330,7 +331,7 @@ const updateScheduleStatus = async (
             <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-100">
               <FileText size={20} className="flex-shrink-0" />
               <h2 className="text-xl sm:text-2xl font-bold text-[#12223a]">
-                Examination History
+                Riwayat Pemeriksaan
               </h2>
             </div>
 
@@ -348,7 +349,7 @@ const updateScheduleStatus = async (
 
                       <span className="px-4 py-2 rounded-xl border bg-gray-50 text-sm whitespace-nowrap">
   {new Date(exam.examination_date).toLocaleDateString(
-    'en-GB',
+    'id-ID',
     {
       day: '2-digit',
       month: 'short',
@@ -359,12 +360,12 @@ const updateScheduleStatus = async (
                     </div>
 
                     <p className="mt-5 text-base sm:text-lg">
-                      <strong>Complaint:</strong>{' '}
+                      <strong>Keluhan:</strong>{' '}
                       {exam.complaint || '-'}
                     </p>
 
                     <p className="mt-3 text-base sm:text-lg">
-                      <strong>Treatment:</strong>{' '}
+                      <strong>Tindakan:</strong>{' '}
                       {exam.treatment || '-'}
                     </p>
 
@@ -377,7 +378,7 @@ const updateScheduleStatus = async (
                 ))
               ) : (
                 <p className="text-center text-gray-500 py-6">
-                  No examinations found.
+                  Data pemeriksaan tidak ditemukan.
                 </p>
               )}
             </div>
@@ -388,7 +389,7 @@ const updateScheduleStatus = async (
             <div className="flex items-center gap-3 px-6 py-5 border-b border-gray-100">
               <Calendar size={20} className="flex-shrink-0" />
               <h2 className="text-xl sm:text-2xl font-bold text-[#12223a]">
-                Control Schedule
+                Jadwal Kontrol
               </h2>
             </div>
 
@@ -405,7 +406,7 @@ const updateScheduleStatus = async (
                           {new Date(
                             schedule.control_date
                           )
-                            .toLocaleString('en-US', {
+                            .toLocaleString('id-ID', {
                               month: 'short',
                             })
                             .toUpperCase()}
@@ -420,7 +421,7 @@ const updateScheduleStatus = async (
 
                       <div>
                         <h3 className="text-xl font-bold text-[#12223a]">
-                          Follow-up Appointment
+                          Jadwal Kontrol Lanjutan
                         </h3>
 
                         <p className="text-gray-500">
@@ -430,13 +431,13 @@ const updateScheduleStatus = async (
                     </div>
 
                     <span className="px-4 py-2 rounded-full text-blue-600 bg-blue-50 border border-blue-100 whitespace-nowrap">
-                      {schedule.status}
+                      {formatStatus(schedule.status)}
                     </span>
                   </div>
                 ))
               ) : (
                 <p className="text-center text-gray-500 py-6">
-                  No control schedules found.
+                  Jadwal kontrol tidak ditemukan.
                 </p>
               )}
             </div>

@@ -43,7 +43,7 @@ useEffect(() => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      setError('Email and password are required.');
+      setError('Email dan password wajib diisi.');
       return;
     }
     setIsLoading(true);
@@ -57,13 +57,13 @@ useEffect(() => {
           { replace: true }
         );
       } else {
-        setError('Login failed. Please check your credentials.');
+        setError('Login gagal. Periksa kembali email dan password Anda.');
       }
     } catch (err) {
       setError(
         err.response?.data?.message ||
           err.response?.data?.error ||
-          'Login failed. Please try again.'
+          'Login gagal. Silakan coba lagi.'
       );
     } finally {
       setIsLoading(false);
@@ -95,8 +95,8 @@ useEffect(() => {
             Center
           </h1>
           <p className="text-gray-300 text-base leading-relaxed max-w-sm">
-            Premium clinic management system. Streamline your
-            practice with modern, intuitive tools.
+            Sistem manajemen klinik premium. Permudah operasional
+            praktik Anda dengan fitur yang modern dan intuitif.
           </p>
         </div>
       </div>
@@ -108,10 +108,10 @@ useEffect(() => {
           {/* Heading */}
           <div className="mb-8">
             <h2 className="text-[#12223a] font-bold text-3xl mb-2">
-              Welcome Back
+              Selamat Datang Kembali
             </h2>
             <p className="text-gray-500 text-sm">
-              Please enter your details to sign in.
+              Silakan masukkan data Anda untuk login.
             </p>
           </div>
 
@@ -124,7 +124,7 @@ useEffect(() => {
                 htmlFor="email"
                 className="block text-sm font-medium text-[#12223a] mb-1.5"
               >
-                Email Address
+                Alamat Email
               </label>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
@@ -161,7 +161,7 @@ useEffect(() => {
   type="button"
   onClick={() => navigate('/forgot-password')}
   className="text-sm font-semibold text-[#12223a] hover:text-[#d4af37] transition-colors">
-  Forgot password?
+  Lupa password?
 </button>
               </div>
               <div className="relative">
@@ -202,10 +202,10 @@ useEffect(() => {
               className="w-full py-3.5"
             >
               {isLoading ? (
-                'Signing in...'
+                'Sedang login...'
               ) : (
                 <>
-                  Sign In
+                  Login
                   <ArrowRight size={16} strokeWidth={2} />
                 </>
               )}
@@ -213,8 +213,8 @@ useEffect(() => {
 
             {/* Tip */}
             <p className="text-center text-xs text-gray-400 pt-1">
-              Tip: Use &apos;admin&apos; in email for Admin role, anything else
-              for Doctor role.
+              Tips: Gunakan kata &apos;admin&apos; pada email untuk peran Admin,
+              selain itu untuk peran Dokter.
             </p>
           </form>
         </div>

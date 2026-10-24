@@ -15,7 +15,7 @@ const BackButton = ({ to, className = '' }) => {
   return (
     <button
       onClick={handleClick}
-      aria-label="Go back"
+      aria-label="Kembali"
       className={`p-1 rounded-lg hover:bg-gray-100 active:scale-95 transition-all duration-150 text-[#12223a] ${className}`}
     >
       <ArrowLeft size={20} strokeWidth={2} />

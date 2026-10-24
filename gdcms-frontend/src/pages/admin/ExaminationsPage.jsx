@@ -8,7 +8,7 @@ import examinationService from '../../services/examinationService';
 import { formatDate } from '../../utils/formatDate';
 import useDebounce from '../../hooks/useDebounce';
 
-const TABLE_HEADERS = ['Date', 'Patient', 'Doctor', 'Diagnosis', 'Treatment'];
+const TABLE_HEADERS = ['Tanggal', 'Pasien', 'Dokter', 'Diagnosis', 'Tindakan'];
 
 const ExamRow = memo(({ exam }) => (
   <tr className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors duration-150">
@@ -87,8 +87,8 @@ const AdminExaminationsPage = () => {
   return (
     <div className="p-4 sm:p-8">
       <PageHeader
-        title="Examinations"
-        subtitle="All patient examination records in the clinic."
+        title="Pemeriksaan"
+        subtitle="Seluruh catatan pemeriksaan pasien di klinik."
       />
 
       {/* Filter */}
@@ -96,14 +96,14 @@ const AdminExaminationsPage = () => {
         <SearchBar
           value={search}
           onChange={setSearch}
-          placeholder="Search by patient, doctor, or diagnosis..."
+          placeholder="Cari berdasarkan pasien, dokter, atau diagnosis..."
           className="flex-1"/>
       </div>
 
       {/* Table */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         {!isLoading && filtered.length === 0 ? (
-          <EmptyState message="No examinations found." />
+          <EmptyState message="Data pemeriksaan tidak ditemukan." />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px]">

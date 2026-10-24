@@ -5,7 +5,7 @@ const FormSelect = ({
   value,
   onChange,
   options = [],
-  placeholder = 'Select...',
+  placeholder = 'Pilih...',
   error = '',
   disabled = false,
   required = false,

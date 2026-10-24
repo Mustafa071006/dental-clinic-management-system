@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -10,27 +11,31 @@ import {
   X,
 } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
+import LogoutConfirmModal from '../ui/LogoutConfirmModal';
 
 const adminMenuItems = [
   { label: 'Dashboard', icon: LayoutDashboard, path: '/admin/dashboard' },
-  { label: 'Patients', icon: Users, path: '/admin/patients' },
-  { label: 'Examinations', icon: ClipboardList, path: '/admin/examinations' },
-  { label: 'Control Schedule', icon: Calendar, path: '/admin/control-schedule' },
-  { label: 'Doctors', icon: Stethoscope, path: '/admin/doctors' },
-  { label: 'Transfers', icon: ArrowLeftRight, path: '/admin/transfers' },
+  { label: 'Pasien', icon: Users, path: '/admin/patients' },
+  { label: 'Pemeriksaan', icon: ClipboardList, path: '/admin/examinations' },
+  { label: 'Jadwal Kontrol', icon: Calendar, path: '/admin/control-schedule' },
+  { label: 'Dokter', icon: Stethoscope, path: '/admin/doctors' },
+  { label: 'Transfer Pasien', icon: ArrowLeftRight, path: '/admin/transfers' },
 ];
 
 const doctorMenuItems = [
   { label: 'Dashboard', icon: LayoutDashboard, path: '/doctor/dashboard' },
-  { label: 'My Patients', icon: Users, path: '/doctor/patients' },
+  { label: 'Pasien Saya', icon: Users, path: '/doctor/patients' },
 ];
 
 const Sidebar = ({ isOpen = false, onClose }) => {
   const { isAdmin, logout } = useAuth();
   const navigate = useNavigate();
   const menuItems = isAdmin ? adminMenuItems : doctorMenuItems;
+  const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
 
+  // Logout baru dijalankan setelah pengguna mengonfirmasi di dialog
   const handleLogout = () => {
+    setIsLogoutConfirmOpen(false);
     logout();
     navigate('/login');
   };
@@ -69,7 +74,7 @@ const Sidebar = ({ isOpen = false, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            aria-label="Close menu"
+            aria-label="Tutup menu"
             className="lg:hidden p-1.5 rounded-lg text-gray-300 hover:bg-white/10 hover:text-white transition-colors flex-shrink-0"
           >
             <X size={18} />
@@ -106,14 +111,27 @@ const Sidebar = ({ isOpen = false, onClose }) => {
         {/* Logout */}
         <div className="px-3 pb-5">
           <button
-            onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/10 hover:text-white transition-colors duration-150 w-full text-left"
+            onClick={() => setIsLogoutConfirmOpen(true)}
+            aria-haspopup="dialog"
+            className="group flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:bg-red-500/10 hover:text-red-300 active:scale-[0.98] transition-all duration-150 w-full text-left"
           >
-            <LogOut size={18} strokeWidth={1.8} />
+            <LogOut
+              size={18}
+              strokeWidth={1.8}
+              className="transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+            />
             Logout
           </button>
         </div>
       </aside>
+
+      {isLogoutConfirmOpen && (
+        <LogoutConfirmModal
+          roleLabel={isAdmin ? 'Administrator' : 'Dokter'}
+          onCancel={() => setIsLogoutConfirmOpen(false)}
+          onConfirm={handleLogout}
+        />
+      )}
     </>
   );
 };

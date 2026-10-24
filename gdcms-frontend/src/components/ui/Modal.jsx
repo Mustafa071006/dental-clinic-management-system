@@ -52,7 +52,7 @@ const Modal = ({
             <button
               type="button"
               onClick={onClose}
-              aria-label="Close dialog"
+              aria-label="Tutup dialog"
               className="p-1.5 rounded-lg text-gray-400 hover:text-[#12223a] hover:bg-gray-100 transition-colors"
             >
               <X size={20} />

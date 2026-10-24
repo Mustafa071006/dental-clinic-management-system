@@ -1,3 +1,5 @@
+import { formatStatus } from '../../utils/formatLabel';
+
 /**
  * Status yang didukung:
  * active, complete, completed, pending, scheduled
@@ -15,16 +17,8 @@ const StatusBadge = ({ status }) => {
     scheduled: 'bg-blue-50 text-blue-600 border border-blue-200',
   };
 
-  const labels = {
-    active: 'Active',
-    complete: 'Complete',
-    completed: 'Completed',
-    pending: 'Pending',
-    scheduled: 'Scheduled',
-  };
-
   const style = styles[normalized] || 'bg-gray-100 text-gray-600 border border-gray-300';
-  const label = labels[normalized] || status;
+  const label = formatStatus(status);
 
   return (
     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-colors duration-150 ${style}`}>

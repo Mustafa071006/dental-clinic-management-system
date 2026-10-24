@@ -44,7 +44,7 @@ const ToastViewport = () => {
             <button
               type="button"
               onClick={() => dismiss(toast.id)}
-              aria-label="Dismiss notification"
+              aria-label="Tutup notifikasi"
               className="text-current opacity-50 hover:opacity-100 transition-opacity flex-shrink-0"
             >
               <X size={16} />

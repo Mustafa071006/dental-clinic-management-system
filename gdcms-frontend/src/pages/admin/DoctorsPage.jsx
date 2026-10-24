@@ -81,10 +81,10 @@ const handleCreateDoctor = async (formData) => {
     setDoctors(doctors);
 
     setIsAddModalOpen(false);
-    toast.success('Doctor created successfully.');
+    toast.success('Dokter berhasil ditambahkan.');
   } catch (error) {
     console.error(error);
-    toast.error('Failed to create doctor.');
+    toast.error('Gagal menambahkan dokter.');
   }
 };
 
@@ -108,10 +108,10 @@ const handleSaveDoctor = async (formData) => {
 
     setIsEditModalOpen(false);
     setSelectedDoctor(null);
-    toast.success('Doctor profile updated.');
+    toast.success('Profil dokter berhasil diperbarui.');
   } catch (error) {
     console.error(error);
-    toast.error('Failed to update doctor.');
+    toast.error('Gagal memperbarui data dokter.');
   }
 };
 
@@ -133,21 +133,21 @@ const handleToggleStatus = async (doctor) => {
     setDoctors(doctors);
     toast.success(
       doctor.status === 'ACTIVE'
-        ? 'Doctor deactivated.'
-        : 'Doctor activated.'
+        ? 'Dokter berhasil dinonaktifkan.'
+        : 'Dokter berhasil diaktifkan.'
     );
   } catch (error) {
     console.error(error);
-    toast.error('Failed to update doctor status.');
+    toast.error('Gagal memperbarui status dokter.');
   }
 };
 
 return (
     <div className="p-4 sm:p-8">
       <PageHeader
-  title="Doctor Management"
-  subtitle="Manage clinic staff and doctors."
-  actionLabel="Add Doctor"
+  title="Manajemen Dokter"
+  subtitle="Kelola staf dan dokter klinik."
+  actionLabel="Tambah Dokter"
   onAction={() => setIsAddModalOpen(true)}
 />
 
@@ -156,7 +156,7 @@ return (
   <SearchBar
     value={search}
     onChange={setSearch}
-    placeholder="Search doctors by name or specialization..."
+    placeholder="Cari dokter berdasarkan nama atau spesialisasi..."
     className="max-w-md"
   />
 
@@ -169,7 +169,7 @@ return (
           : 'bg-gray-100 hover:bg-gray-200'
       }`}
     >
-      All ({doctors.length})
+      Semua ({doctors.length})
     </button>
 
     <button
@@ -180,7 +180,7 @@ return (
           : 'bg-gray-100 hover:bg-gray-200'
       }`}
     >
-      Active (
+      Aktif (
       {doctors.filter(
         (d) => d.status === 'ACTIVE'
       ).length}
@@ -195,7 +195,7 @@ return (
           : 'bg-gray-100 hover:bg-gray-200'
       }`}
     >
-      Inactive (
+      Nonaktif (
       {doctors.filter(
         (d) => d.status === 'INACTIVE'
       ).length}
@@ -212,7 +212,7 @@ return (
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <EmptyState message="No doctors found." />
+        <EmptyState message="Dokter tidak ditemukan." />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
           {filtered.map((doctor, idx) => (

@@ -10,15 +10,16 @@ import EmptyState from '../../components/ui/EmptyState';
 import { SkeletonTableRows } from '../../components/ui/Skeleton';
 import patientService from '../../services/patientService';
 import useDebounce from '../../hooks/useDebounce';
+import { formatGender } from '../../utils/formatLabel';
 
 const STATUS_OPTIONS = [
-  { value: '', label: 'All Statuses' },
-  { value: 'active', label: 'Active' },
-  { value: 'complete', label: 'Complete' },
-  { value: 'inactive', label: 'Inactive' },
+  { value: '', label: 'Semua Status' },
+  { value: 'active', label: 'Aktif' },
+  { value: 'complete', label: 'Selesai' },
+  { value: 'inactive', label: 'Nonaktif' },
 ];
 
-const TABLE_HEADERS = ['Patient', 'MRN', 'Contact', 'Assigned Doctor', 'Status', 'Manage'];
+const TABLE_HEADERS = ['Pasien', 'No. RM', 'Kontak', 'Dokter Penanggung Jawab', 'Status', 'Kelola'];
 
 const PatientRow = memo(({ patient: p, onView }) => (
   <tr className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors duration-150">
@@ -33,9 +34,7 @@ const PatientRow = memo(({ patient: p, onView }) => (
             {p.name || p.full_name || '-'}
           </p>
           <p className="text-xs text-gray-400">
-  {p.gender
-    ? `${p.gender.charAt(0).toUpperCase() + p.gender.slice(1).toLowerCase()}`
-    : ''}
+  {formatGender(p.gender)}
   {p.date_of_birth
     ? `, ${new Date(p.date_of_birth).toLocaleDateString('id-ID')}`
     : ''}
@@ -59,7 +58,7 @@ const PatientRow = memo(({ patient: p, onView }) => (
       <button
         onClick={() => onView(p.id)}
         className="text-gray-400 hover:text-[#12223a] active:scale-90 transition-all duration-150"
-        aria-label={`View details for ${p.name || p.full_name || 'patient'}`}
+        aria-label={`Lihat detail ${p.name || p.full_name || 'pasien'}`}
       >
         <Eye size={18} strokeWidth={1.8} />
       </button>
@@ -124,8 +123,8 @@ const DoctorMyPatientsPage = () => {
   return (
     <div className="p-4 sm:p-8">
       <PageHeader
-  title="My Patients"
-  subtitle="View and manage patients assigned to you."
+  title="Pasien Saya"
+  subtitle="Lihat dan kelola pasien yang ditangani oleh Anda."
 />
 
       {/* Filter */}
@@ -133,7 +132,7 @@ const DoctorMyPatientsPage = () => {
         <SearchBar
           value={search}
           onChange={setSearch}
-          placeholder="Search by name or MRN..."
+          placeholder="Cari berdasarkan nama atau No. RM..."
           className="flex-1"
         />
         <FilterDropdown
@@ -146,7 +145,7 @@ const DoctorMyPatientsPage = () => {
       {/* Table */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         {!isLoading && filtered.length === 0 ? (
-          <EmptyState message="No patients found." />
+          <EmptyState message="Pasien tidak ditemukan." />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px]">

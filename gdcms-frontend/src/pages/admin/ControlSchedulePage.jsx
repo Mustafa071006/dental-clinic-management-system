@@ -11,13 +11,13 @@ import { formatDate, formatTime } from '../../utils/formatDate';
 import useDebounce from '../../hooks/useDebounce';
 
 const STATUS_OPTIONS = [
-  { value: '', label: 'All Status' },
-  { value: 'scheduled', label: 'Scheduled' },
-  { value: 'completed', label: 'Completed' },
-  { value: 'cancelled', label: 'Cancelled' },
+  { value: '', label: 'Semua Status' },
+  { value: 'scheduled', label: 'Terjadwal' },
+  { value: 'completed', label: 'Selesai' },
+  { value: 'cancelled', label: 'Dibatalkan' },
 ];
 
-const TABLE_HEADERS = ['Patient', 'Doctor', 'Control Date', 'Time', 'Status'];
+const TABLE_HEADERS = ['Pasien', 'Dokter', 'Tanggal Kontrol', 'Waktu', 'Status'];
 
 const ScheduleRow = memo(({ s }) => (
   <tr className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors duration-150">
@@ -104,8 +104,8 @@ const AdminControlSchedulePage = () => {
   return (
     <div className="p-4 sm:p-8">
       <PageHeader
-        title="Control Schedule"
-        subtitle="Manage patient follow-up and control appointments."
+        title="Jadwal Kontrol"
+        subtitle="Kelola jadwal kontrol dan tindak lanjut pasien."
       />
 
       {/* Filter */}
@@ -113,7 +113,7 @@ const AdminControlSchedulePage = () => {
         <SearchBar
           value={search}
           onChange={setSearch}
-          placeholder="Search by patient or doctor..."
+          placeholder="Cari berdasarkan pasien atau dokter..."
           className="flex-1"
         />
         <FilterDropdown
@@ -126,7 +126,7 @@ const AdminControlSchedulePage = () => {
       {/* Table */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         {!isLoading && filtered.length === 0 ? (
-          <EmptyState message="No control schedules found." />
+          <EmptyState message="Jadwal kontrol tidak ditemukan." />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[640px]">

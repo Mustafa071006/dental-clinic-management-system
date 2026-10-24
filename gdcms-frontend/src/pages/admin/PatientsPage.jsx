@@ -12,8 +12,9 @@ import patientService from '../../services/patientService';
 import doctorService from '../../services/doctorService';
 import { formatDate } from '../../utils/formatDate';
 import useDebounce from '../../hooks/useDebounce';
+import { formatGender } from '../../utils/formatLabel';
 
-const TABLE_HEADERS = ['Patient', 'MRN', 'Contact', 'Assigned Doctor', 'Status', 'Actions'];
+const TABLE_HEADERS = ['Pasien', 'No. RM', 'Kontak', 'Dokter Penanggung Jawab', 'Status', 'Aksi'];
 
 const PatientRow = memo(({ patient: p, onView }) => (
   <tr className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors duration-150">
@@ -29,9 +30,7 @@ const PatientRow = memo(({ patient: p, onView }) => (
             {p.name || p.full_name || '-'}
           </p>
           <p className="text-xs text-gray-400">
-            {p.gender
-              ? `${p.gender.charAt(0).toUpperCase() + p.gender.slice(1).toLowerCase()}`
-              : ''}
+            {formatGender(p.gender)}
             {p.date_of_birth
               ? `, ${formatDate(p.date_of_birth)}`
               : ''}
@@ -63,8 +62,8 @@ const PatientRow = memo(({ patient: p, onView }) => (
       <button
         onClick={() => onView(p.id)}
         className="text-gray-400 hover:text-[#12223a] active:scale-90 transition-all duration-150"
-        title="View detail"
-        aria-label={`View details for ${p.name || p.full_name || 'patient'}`}
+        title="Lihat detail"
+        aria-label={`Lihat detail ${p.name || p.full_name || 'pasien'}`}
       >
         <Eye size={18} strokeWidth={1.8} />
       </button>
@@ -109,14 +108,14 @@ const AdminPatientsPage = () => {
   }, []);
 
   const statusOptions = [
-  { value: '', label: 'All Statuses' },
-  { value: 'active', label: 'Active' },
-  { value: 'complete', label: 'Complete' },
-  { value: 'inactive', label: 'Inactive' },
+  { value: '', label: 'Semua Status' },
+  { value: 'active', label: 'Aktif' },
+  { value: 'complete', label: 'Selesai' },
+  { value: 'inactive', label: 'Nonaktif' },
 ];
 
   const doctorOptions = useMemo(() => {
-    const opts = [{ value: '', label: 'All Doctors' }];
+    const opts = [{ value: '', label: 'Semua Dokter' }];
     doctors.forEach((d) => {
       opts.push({ value: String(d.id), label: d.name });
     });
@@ -155,9 +154,9 @@ const AdminPatientsPage = () => {
   return (
     <div className="p-4 sm:p-8">
       <PageHeader
-        title="Patients"
-        subtitle="Manage and view all patient records."
-        actionLabel="Add Patient"
+        title="Pasien"
+        subtitle="Kelola dan lihat seluruh data pasien."
+        actionLabel="Tambah Pasien"
         onAction={() => navigate('/admin/patients/add')}
       />
 
@@ -166,7 +165,7 @@ const AdminPatientsPage = () => {
         <SearchBar
           value={search}
           onChange={setSearch}
-          placeholder="Search by name or MRN..."
+          placeholder="Cari berdasarkan nama atau No. RM..."
           className="flex-1"
         />
         <div className="flex gap-3">
@@ -188,7 +187,7 @@ const AdminPatientsPage = () => {
       {/* Table */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         {!isLoading && filtered.length === 0 ? (
-          <EmptyState message="No patients found." />
+          <EmptyState message="Pasien tidak ditemukan." />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px]">

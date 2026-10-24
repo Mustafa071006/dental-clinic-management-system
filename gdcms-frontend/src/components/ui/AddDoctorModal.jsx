@@ -42,14 +42,14 @@ const AddDoctorModal = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Add Doctor"
+      title="Tambah Dokter"
       footer={
         <>
           <Button variant="secondary" onClick={onClose} disabled={isSaving}>
-            Cancel
+            Batal
           </Button>
           <Button onClick={handleSubmit} isLoading={isSaving}>
-            Create Doctor
+            Simpan Dokter
           </Button>
         </>
       }
@@ -58,8 +58,8 @@ const AddDoctorModal = ({
         <FormInput
           id="add-doctor-name"
           name="name"
-          label="Doctor Name"
-          placeholder="e.g. Dr. Jane Smith"
+          label="Nama Dokter"
+          placeholder="cth. Dr. Jane Smith"
           value={form.name}
           onChange={handleChange}
         />
@@ -87,8 +87,8 @@ const AddDoctorModal = ({
         <FormInput
           id="add-doctor-specialization"
           name="specialization"
-          label="Specialization"
-          placeholder="e.g. Orthodontics"
+          label="Spesialisasi"
+          placeholder="cth. Ortodonti"
           value={form.specialization}
           onChange={handleChange}
         />
